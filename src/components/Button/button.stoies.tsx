@@ -1,27 +1,30 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { widthInfo } from "@storybook/addon-info";
+// import { widthInfo } from "@storybook/addon-info";
 import Button from "./index";
 
 import { storiesOf } from "@storybook/react";
 storiesOf("Button", module)
-  .addDecorator(widthInfo)
-  .addParameters({
-    info: {
-      //支持markdown
-      text: `
-      this is a very nice component
-      ## this is a header
-      ~~~js
-      const a = 'hello'
-      ~~~
-      `,
-      inline: true,
-    },
-  })
-  .add("默认 button", defaultButton, {
-    info: { inline: false },
-  })
+  // .addDecorator(widthInfo)
+  // .addParameters({
+  //   info: {
+  //     //支持markdown
+  //     text: `
+  //     this is a very nice component
+  //     ## this is a header
+  //     ~~~js
+  //     const a = 'hello'
+  //     ~~~
+  //     `,
+  //     inline: true,
+  //   },
+  // })
+  .add(
+    //要想注释可以显示出来，story就需要作为主体story，命名和组件相同，即修改默认 button为Button
+    "默认 button",
+    defaultButton
+    // {info: { inline: false },}
+  )
   .add("不同尺寸 button", buttonWidthSize)
   .add("不同类型 button", buttonWithType);
 
