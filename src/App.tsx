@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+import { Button, ButtonSize, ButtonType } from "./components/Button/Button";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <article className="App">
+      <section className="btn-con">
+        <Button
+          btnType={ButtonType.Danger}
+          size={ButtonSize.Small}
+          onClick={() => {
+            alert("hello");
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          danger button
+        </Button>
+        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>
+          primary button
+        </Button>
+        <Button btnType={ButtonType.Link} href="www.baidu.com">
+          link button
+        </Button>
+        <Button btnType={ButtonType.Link} href="www.baidu.com" disabled={true}>
+          link button
+        </Button>
+        <Button disabled={true}>disabled button</Button>
+      </section>
+
+      <section className="input-con"></section>
+    </article>
   );
 }
 
