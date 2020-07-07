@@ -17,11 +17,16 @@ export enum ButtonType {
 
 //组件可以设置的属性
 interface BaseButtonProps {
+  /** 自定义类名 */
   className?: string;
   children?: React.ReactNode;
+  /** 当btnType为link时，必填 */
   href?: string;
+  /** 设置 Button 的类型 */
   btnType?: ButtonType;
+  /** 设置 Button 的尺寸 */
   size?: ButtonSize;
+  /** 设置 Button 的禁用 */
   disabled?: boolean;
 }
 
@@ -32,6 +37,13 @@ type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>;
 //设置这些属性为可选属性
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
 
+/**
+ * 页面中最常用的按钮元素，适用于完成特定的交互。
+ * ## 引用方法
+ * ~~~js
+ * import {Button} from 'antd-components'
+ * ~~~
+ */
 export const Button: FC<ButtonProps> = (props) => {
   const {
     className,
@@ -73,3 +85,5 @@ Button.defaultProps = {
   btnType: ButtonType.Default,
   disabled: false,
 };
+
+export default Button;
