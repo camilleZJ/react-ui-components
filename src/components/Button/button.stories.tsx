@@ -1,17 +1,23 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 // import { withInfo } from "@storybook/addon-info";
-import { Button, ButtonSize, ButtonType } from "./Button";
+import { Button } from "./Button";
+import { ButtonSize, ButtonType } from "./ButtonProps";
 
 export const defaultButton = () => {
-  return <Button onClick={action("clicked")}>default button</Button>;
+  return <Button onClick={action("default button")}>default button</Button>;
 };
 
 export const buttonWidthSize = () => {
   return (
     <>
-      <Button size={ButtonSize.Large}>large button</Button>;
-      <Button size={ButtonSize.Small}>small button</Button>;
+      <Button onClick={action("lg default button")} size={ButtonSize.Large}>
+        large default button
+      </Button>
+      <Button onClick={action("default button")}>default button</Button>
+      <Button onClick={action("sm default button")} size={ButtonSize.Small}>
+        small default button
+      </Button>
     </>
   );
 };
@@ -22,9 +28,18 @@ buttonWidthSize.story = {
 export const buttonWithType = () => {
   return (
     <>
-      <Button btnType={ButtonType.Primary}>primary button</Button>;
-      <Button btnType={ButtonType.Danger}>danger button</Button>;
-      <Button btnType={ButtonType.Link} href="baidu.com">
+      {/* <Button onClick={action("default button")}>default button</Button> */}
+      <Button btnType={ButtonType.Primary} onClick={action("primary button")}>
+        primary button
+      </Button>
+      <Button btnType={ButtonType.Danger} onClick={action("danger button")}>
+        danger button
+      </Button>
+      <Button
+        btnType={ButtonType.Link}
+        href="https://www.baidu.com/"
+        onClick={action("link")}
+      >
         link button
       </Button>
     </>
@@ -43,27 +58,62 @@ buttonWithType.story = {
 // someName1234 -> 'Some Name 1234'
 // someName1_2_3_4 -> 'Some Name 1 2 3 4'
 
+export const buttonWithDiasbled = () => {
+  return (
+    <>
+      <Button disabled onClick={action("disabled default button")}>
+        disabled default button
+      </Button>
+      <Button
+        disabled
+        onClick={action("disabled primary button")}
+        btnType={ButtonType.Primary}
+      >
+        disabled primary button
+      </Button>
+      <Button
+        disabled
+        onClick={action("disabled danger button")}
+        btnType={ButtonType.Danger}
+      >
+        disabled danger button
+      </Button>
+      <Button
+        disabled
+        onClick={action("disabled link button")}
+        btnType={ButtonType.Link}
+        href="#"
+      >
+        disabled link button
+      </Button>
+    </>
+  );
+};
+buttonWithDiasbled.story = {
+  name: "禁用的 Button",
+};
+
 export default {
-  title: "Button",
+  title: "Button 按钮",
   component: Button,
   // includeStories: ["buttonWidthSize", "buttonWithType"], //配置要导出哪些组件，添加这个配置下面的export就不会都export
   // excludeStories: ["defaultButton"], //排除哪些组件不被export
-// decorators: [withInfo],
-//   parameters: {
-//     info: {
-//       // 支持markdown
-//       text: `
-//           this is a very nice component
-//           ## this is a header
-//           ~~~js
-//           const a = 'hello'
-//           ~~~
-//           `,
-//       inline: true,
-//       // header: true,
-//       // source: true,
-//     },
-//   },
+  // decorators: [withInfo],
+  //   parameters: {
+  //     info: {
+  //       // 支持markdown
+  //       text: `
+  //           this is a very nice component
+  //           ## this is a header
+  //           ~~~js
+  //           const a = 'hello'
+  //           ~~~
+  //           `,
+  //       inline: true,
+  //       // header: true,
+  //       // source: true,
+  //     },
+  //   },
 };
 
 // import { storiesOf } from "@storybook/react";
