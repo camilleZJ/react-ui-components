@@ -5,9 +5,17 @@ import { Button } from "./components/Button/Button";
 
 import Menu from "./components/Menu";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import Icon from "./components/Icon/icon";
+
+library.add(fas);
+
 function App() {
   return (
     <article className="App">
+      <Icon icon="angle-down" theme="primary" size="6x"/>
+
       <section className="btn-con">
         <Button
           btnType={ButtonType.Danger}
@@ -51,7 +59,12 @@ function App() {
           <Menu.Item index="4" disabled>
             menu3
           </Menu.Item>
-          <Menu.Item index="5">menu4</Menu.Item>
+          <Menu.SubMenu title="sub-menu">
+            <Menu.Item>menu5-1</Menu.Item>
+            <Menu.Item disabled>menu5-2</Menu.Item>
+            <Menu.Item>menu5-3</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.Item index="6">menu6</Menu.Item>
         </Menu>
       </section>
 

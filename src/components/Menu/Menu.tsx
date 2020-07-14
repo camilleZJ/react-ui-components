@@ -8,7 +8,15 @@ import {
 } from "./MenuProps";
 
 export const Menu: FC<MenuProps> = (props) => {
-  const { children, className, mode, style, defaultIndex, onSelect } = props;
+  const {
+    children,
+    className,
+    mode,
+    style,
+    defaultIndex,
+    onSelect,
+    defaultOpenSubMenus,
+  } = props;
   const [currentIndex, setActive] = useState(defaultIndex);
 
   const classes = classNames("menu-con", className, {
@@ -28,6 +36,8 @@ export const Menu: FC<MenuProps> = (props) => {
   const passedContext: IMenuContext = {
     index: currentIndex ? currentIndex : "0", //因为初始值defaultIndex为可选参数，可能为undefined，所以useState(defaultIndex)获取的初始值可能也是undefined
     onSelect: handleClick,
+    mode,
+    defaultOpenSubMenus,
   };
 
   //设置menu的children只能为MenuItem|SubMenu
@@ -51,7 +61,7 @@ export const Menu: FC<MenuProps> = (props) => {
   return (
     <ul className={classes} style={style}>
       <menuContext.Provider value={passedContext}>
-        {renderChildren}
+        {renderChildren()}
       </menuContext.Provider>
     </ul>
   );
@@ -60,7 +70,7 @@ export const Menu: FC<MenuProps> = (props) => {
 Menu.defaultProps = {
   defaultIndex: "0",
   mode: "horizontal",
-  //  defaultOpenSubMenus: [],
+  defaultOpenSubMenus: [],
 };
 
 export default Menu;

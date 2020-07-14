@@ -12,14 +12,15 @@ export interface MenuProps {
   onSelect?: selectFunc;
   style?: CSSProperties;
   // children?: React.ReactNode; //默认有这个属性设置
+  defaultOpenSubMenus?: string[];
 }
 
 //Menu context
 export interface IMenuContext {
   index: string;
   onSelect?: selectFunc;
-  // mode?: MenuMode;
-  // defaultOpenSubMenus?: string[];
+  mode?: MenuMode;
+  defaultOpenSubMenus?: string[];
 }
 
 export const menuContext = createContext<IMenuContext>({

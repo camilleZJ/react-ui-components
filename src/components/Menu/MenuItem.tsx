@@ -13,7 +13,7 @@ const MenuItem: FC<MenuItemProps> = (props) => {
 
   function handleClick() {
     if (!disabled && menuContextInfo.onSelect) {
-      if (index || typeof index === "string") {
+      if (index && typeof index === "string") {
         menuContextInfo.onSelect(index);
       } else {
         console.error(
