@@ -2,7 +2,10 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 // import { withInfo } from "@storybook/addon-info";
 import { Button } from "./Button";
-import { ButtonSize, ButtonType } from "./ButtonProps";
+// import { ButtonSize, ButtonType } from "./ButtonProps";
+
+export type ButtonSize = "lg" | "sm";
+export type ButtonType = "primary" | "default" | "danger" | "link";
 
 export const defaultButton = () => {
   return <Button onClick={action("default button")}>default button</Button>;
@@ -11,11 +14,11 @@ export const defaultButton = () => {
 export const buttonWidthSize = () => {
   return (
     <>
-      <Button onClick={action("lg default button")} size={ButtonSize.Large}>
+      <Button onClick={action("lg default button")} size="lg">
         large default button
       </Button>
       <Button onClick={action("default button")}>default button</Button>
-      <Button onClick={action("sm default button")} size={ButtonSize.Small}>
+      <Button onClick={action("sm default button")} size="sm">
         small default button
       </Button>
     </>
@@ -29,14 +32,14 @@ export const buttonWithType = () => {
   return (
     <>
       {/* <Button onClick={action("default button")}>default button</Button> */}
-      <Button btnType={ButtonType.Primary} onClick={action("primary button")}>
+      <Button btnType="primary" onClick={action("primary button")}>
         primary button
       </Button>
-      <Button btnType={ButtonType.Danger} onClick={action("danger button")}>
+      <Button btnType="danger" onClick={action("danger button")}>
         danger button
       </Button>
       <Button
-        btnType={ButtonType.Link}
+        btnType="link"
         href="https://www.baidu.com/"
         onClick={action("link")}
       >
@@ -67,21 +70,21 @@ export const buttonWithDiasbled = () => {
       <Button
         disabled
         onClick={action("disabled primary button")}
-        btnType={ButtonType.Primary}
+        btnType="primary"
       >
         disabled primary button
       </Button>
       <Button
         disabled
         onClick={action("disabled danger button")}
-        btnType={ButtonType.Danger}
+        btnType="danger"
       >
         disabled danger button
       </Button>
       <Button
         disabled
         onClick={action("disabled link button")}
-        btnType={ButtonType.Link}
+        btnType="link"
         href="#"
       >
         disabled link button

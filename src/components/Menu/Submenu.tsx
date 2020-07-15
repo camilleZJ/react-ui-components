@@ -2,6 +2,7 @@ import React, { FC, useState, useContext } from "react";
 import classNames from "classnames";
 import Icon from "../Icon/icon";
 import { SubMenuProps, MenuItemProps, menuContext } from "./MenuProps";
+import Transition from "../Transition";
 
 const SubMenu: FC<SubMenuProps> = (props) => {
   const { index, title, children, className, style } = props;
@@ -15,8 +16,8 @@ const SubMenu: FC<SubMenuProps> = (props) => {
 
   const classes = classNames("menu-item submenu-item", className, {
     "is-active": menuContextInfo.index === index,
-    // 'is-opened': menuOpen,
-    // 'is-vertical': menuContextInfo.mode === 'vertical'
+    "is-opened": menuOpen, //点击展开后三角图标处理
+    "is-vertical": menuContextInfo.mode === "vertical", //处理三角图标 垂直展示是点击不是hover，去掉hover的样式
   });
 
   const handleClick = (e: React.MouseEvent) => {
@@ -72,7 +73,11 @@ const SubMenu: FC<SubMenuProps> = (props) => {
       }
     );
 
-    return <ul className={subMenuClasses}>{childrenComponents}</ul>;
+    return (
+      <Transition in={menuOpen} timeout={300} animation="zoom-in-top">
+        <ul className={subMenuClasses}>{childrenComponents}</ul>
+      </Transition>
+    );
   }
 
   return (

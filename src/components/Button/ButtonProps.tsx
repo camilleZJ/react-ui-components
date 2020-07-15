@@ -1,18 +1,18 @@
 import { ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 
-// export type ButtonSize = "lg" | "sm";
-// export type ButtonType = "primary" | "default" | "danger" | "link";
-export enum ButtonSize {
-  Large = "lg",
-  Small = "sm",
-}
+export type ButtonSize = "lg" | "sm";
+export type ButtonType = "primary" | "default" | "danger" | "link";
+// export enum ButtonSize {
+//   Large = "lg",
+//   Small = "sm",
+// }
 
-export enum ButtonType {
-  Primary = "primary",
-  Default = "default",
-  Danger = "danger",
-  Link = "link",
-}
+// export enum ButtonType {
+//   Primary = "primary",
+//   Default = "default",
+//   Danger = "danger",
+//   Link = "link",
+// }
 
 //组件可以设置的属性
 interface BaseButtonProps {

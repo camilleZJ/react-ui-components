@@ -1,8 +1,6 @@
 import React from "react";
-
-import { ButtonSize, ButtonType } from "./components/Button/ButtonProps";
+// import { ButtonSize, ButtonType } from "./components/Button/ButtonProps";
 import { Button } from "./components/Button/Button";
-
 import Menu from "./components/Menu";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -14,35 +12,39 @@ library.add(fas);
 function App() {
   return (
     <article className="App">
-      <Icon icon="angle-down" theme="primary" size="6x"/>
+      <Icon icon="angle-down" theme="primary" size="6x" />
 
       <section className="btn-con">
         <Button
-          btnType={ButtonType.Danger}
-          size={ButtonSize.Small}
+          btnType="danger"
+          size="sm"
           onClick={() => {
             alert("hello");
           }}
         >
           danger button
         </Button>
-        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>
+        <Button btnType="primary" size="lg">
           primary button
         </Button>
-        <Button btnType={ButtonType.Link} href="www.baidu.com">
+        <Button btnType="link" href="www.baidu.com">
           link button
         </Button>
-        <Button btnType={ButtonType.Link} href="www.baidu.com" disabled={true}>
+        <Button btnType="link" href="www.baidu.com" disabled={true}>
           link button
         </Button>
         <Button disabled={true}>disabled button</Button>
       </section>
 
-      <section className="menu-con">
+      <section className="menus-con">
         <Menu>
           <Menu.Item>default menu1</Menu.Item>
-          <Menu.Item>default menu2</Menu.Item>
-          <Menu.Item>default menu3</Menu.Item>
+          <Menu.Item disabled>default menu2</Menu.Item>
+          <Menu.SubMenu title="sub-menu">
+            <Menu.Item>default menu3-1</Menu.Item>
+            <Menu.Item>default menu3-2</Menu.Item>
+            <Menu.Item>default menu3-3</Menu.Item>
+          </Menu.SubMenu>
           <Menu.Item>default menu4</Menu.Item>
         </Menu>
 
@@ -50,6 +52,7 @@ function App() {
           onSelect={(index) => console.log(index)}
           mode="vertical"
           defaultIndex="1"
+          defaultOpenSubMenus={["5", "7"]}
           style={{ color: "red" }}
         >
           <Menu.Item index="2">menu1</Menu.Item>
@@ -59,12 +62,16 @@ function App() {
           <Menu.Item index="4" disabled>
             menu3
           </Menu.Item>
-          <Menu.SubMenu title="sub-menu">
+          <Menu.SubMenu title="sub-menu" index="5">
             <Menu.Item>menu5-1</Menu.Item>
             <Menu.Item disabled>menu5-2</Menu.Item>
             <Menu.Item>menu5-3</Menu.Item>
           </Menu.SubMenu>
           <Menu.Item index="6">menu6</Menu.Item>
+          <Menu.SubMenu title="sub-menu" index="7">
+            <Menu.Item>menu7-1</Menu.Item>
+            <Menu.Item>menu7-2</Menu.Item>
+          </Menu.SubMenu>
         </Menu>
       </section>
 
