@@ -57,4 +57,41 @@
   }
 }
 
+@mixin animition-active($opacity, $scaleY, $origin) {
+  opacity: $opacity;
+  transform: $scaleY;
+  transform-origin: $origin;
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms,
+    opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+}
 
+@mixin zoom-animation(
+  $direction: top,
+  $scaleStart: scaleY(0),
+  $scaleEnd: scaleY(1),
+  $origin: center top
+) {
+  .zoom-in-#{$direction}-enter {
+    opacity: 0;
+    transform: $scaleStart;
+  }
+  .zoom-in-#{$direction}-enter-active {
+    @include animition-active(1, $scaleEnd, $origin);
+  }
+  .zoom-in-#{$direction}-exit {
+    opacity: 1;
+  }
+  .zoom-in-#{$direction}-exit-active {
+    @include animition-active(0, $scaleStart, $origin);
+  }
+}
+
+@mixin border-right-radius($radius) {
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+@mixin border-left-radius($radius) {
+  border-top-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}

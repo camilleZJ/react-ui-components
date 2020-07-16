@@ -13,7 +13,7 @@ type TransitionProps = CSSTransitionProps & {
   wrapper?: boolean;
 };
 
-const Transition: React.FC<TransitionProps> = (props) => {
+const Transition: React.FC<CSSTransitionProps> = (props) => {
   const { children, classNames, animation, wrapper, ...restProps } = props;
 
   return (
@@ -25,8 +25,9 @@ const Transition: React.FC<TransitionProps> = (props) => {
     </CSSTransition>
   );
 };
+
 Transition.defaultProps = {
-  unmountOnExit: true,
+  unmountOnExit: true, //在元素退场时，自动把DOM删除掉
   appear: true,
 };
 

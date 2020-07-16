@@ -82,10 +82,10 @@ const SubMenu: FC<SubMenuProps> = (props) => {
 
   return (
     <li key={index} className={classes} style={style} {...hoverEvents}>
-      <p className="submenu-title" {...clickEvent}>
+      <div className="submenu-title" {...clickEvent}>
         {title}
         <Icon icon="angle-down" className="arrow-icon" />
-      </p>
+      </div>
       {renderChildren()}
     </li>
   );

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import classNames from "classnames";
 
-import { ButtonType, ButtonProps } from "./ButtonProps";
+import { ButtonProps } from "./ButtonProps";
 
 /**
  * 页面中最常用的按钮元素，适用于完成特定的交互。
