@@ -1,1 +1,21 @@
 /*storybook文档样式的配置*/
+%table-sty {
+  border-collapse: collapse;
+  border: 1px solid #cccccc;
+  color: #444444;
+  margin-top: 0.25rem;
+  padding-right: 0.5rem;
+  padding: 0.25rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.info-table {
+  width: 100%;
+  @extend %table-sty;
+  
+  td,
+  th {
+    @extend %table-sty;
+  }
+}

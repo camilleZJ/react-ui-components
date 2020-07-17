@@ -1,6 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-// import { withInfo } from "@storybook/addon-info";
+import { withInfo } from "@storybook/addon-info";
 import { Button } from "./Button";
 // import { ButtonSize, ButtonType } from "./ButtonProps";
 
@@ -9,6 +9,9 @@ export type ButtonType = "primary" | "default" | "danger" | "link";
 
 export const defaultButton = () => {
   return <Button onClick={action("default button")}>default button</Button>;
+};
+defaultButton.story = {
+  name: "Button",
 };
 
 export const buttonWidthSize = () => {
@@ -102,21 +105,22 @@ export default {
   // includeStories: ["buttonWidthSize", "buttonWithType"], //配置要导出哪些组件，添加这个配置下面的export就不会都export
   // excludeStories: ["defaultButton"], //排除哪些组件不被export
   // decorators: [withInfo],
-  //   parameters: {
-  //     info: {
-  //       // 支持markdown
-  //       text: `
-  //           this is a very nice component
-  //           ## this is a header
-  //           ~~~js
-  //           const a = 'hello'
-  //           ~~~
-  //           `,
-  //       inline: true,
-  //       // header: true,
-  //       // source: true,
-  //     },
+  // parameters: {
+  //   info: {
+  //     // 支持markdown
+  //     // text: `
+  //     //       this is a very nice component
+  //     //       ## this is a header
+  //     //       ~~~js
+  //     //       const a = 'hello'
+  //     //       ~~~
+  //     //       `,
+  //     // inline: true,
+  //     // header: true,
+  //     // source: true,
+
   //   },
+  // },
 };
 
 // import { storiesOf } from "@storybook/react";

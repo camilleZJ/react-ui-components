@@ -5,7 +5,7 @@ import Menu from "./components/Menu";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-import Icon from "./components/Icon/icon";
+import Icon from "./components/Icon";
 
 library.add(fas);
 
@@ -52,23 +52,19 @@ function App() {
           onSelect={(index) => console.log(index)}
           mode="vertical"
           defaultIndex="1"
-          defaultOpenSubMenus={["5", "7"]}
-          style={{ color: "red" }}
+          defaultOpenSubMenus={["3", "5"]}
+          // style={{ color: "red" }}
         >
-          <Menu.Item index="2">menu1</Menu.Item>
-          <Menu.Item index="3" style={{ color: "yellow" }}>
-            menu2
-          </Menu.Item>
-          <Menu.Item index="4" disabled>
-            menu3
-          </Menu.Item>
-          <Menu.SubMenu title="sub-menu" index="5">
+          <Menu.Item>menu1</Menu.Item>
+          <Menu.Item>menu2</Menu.Item>
+          <Menu.Item disabled>menu3</Menu.Item>
+          <Menu.SubMenu title="sub-menu">
             <Menu.Item>menu5-1</Menu.Item>
             <Menu.Item disabled>menu5-2</Menu.Item>
             <Menu.Item>menu5-3</Menu.Item>
           </Menu.SubMenu>
-          <Menu.Item index="6">menu6</Menu.Item>
-          <Menu.SubMenu title="sub-menu" index="7">
+          <Menu.Item>menu6</Menu.Item>
+          <Menu.SubMenu title="sub-menu">
             <Menu.Item>menu7-1</Menu.Item>
             <Menu.Item>menu7-2</Menu.Item>
           </Menu.SubMenu>

@@ -1,4 +1,3 @@
-/*viking-menu*/
 .menu-con {
   display: flex;
   flex-wrap: wrap;
@@ -20,9 +19,9 @@
     }
 
     &.is-disabled {
-      color: $menu-item-disabled-color;
+      color: $menu-item-disabled-color !important;
       pointer-events: none;
-      cursor: default;
+      cursor: default !important;
     }
 
     &.is-active,
@@ -56,16 +55,14 @@
 
   .submenu-con {
     // display: none;
+    // transition: $menu-transition;
     list-style: none;
     padding-left: 0;
     white-space: nowrap;
-    // transition: $menu-transition;
 
     .menu-item {
-      padding: $menu-item-padding-y $menu-item-padding-x;
-      cursor: pointer;
-      transition: $menu-transition;
       color: $body-color;
+
       &.is-active,
       &:hover {
         color: $menu-item-active-color !important;

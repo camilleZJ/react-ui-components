@@ -7,6 +7,13 @@ import {
   MenuItemProps,
 } from "./MenuProps";
 
+/**
+ * 为网站提供导航功能的菜单。支持横向纵向两种模式，支持下拉菜单。
+ * ~~~js
+ * import { Menu } from 'antd-components'
+ * //然后可以使用 Menu.Item 和 Menu.Submenu 访问选项和子下拉菜单组件
+ * ~~~
+ */
 export const Menu: FC<MenuProps> = (props) => {
   const {
     children,
@@ -46,9 +53,15 @@ export const Menu: FC<MenuProps> = (props) => {
       const childElement = child as React.FunctionComponentElement<
         MenuItemProps
       >;
+
       const { displayName } = childElement.type;
       if (displayName === "MenuItem" || displayName === "SubMenu") {
         // return child;
+
+        // const userItemIndex = childElement.props.index; //item或SubMenu上存在自定义index
+        // const itemIndex = userItemIndex
+        //   ? userItemIndex.toString()
+        //   : index.toString();
         return React.cloneElement(childElement, { index: index.toString() }); //添加默认index为索引 => index就变为非必传属性
       } else {
         console.error(

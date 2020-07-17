@@ -1,10 +1,10 @@
 import React, { FC, useState, useContext } from "react";
 import classNames from "classnames";
-import Icon from "../Icon/icon";
+import Icon from "../Icon";
 import { SubMenuProps, MenuItemProps, menuContext } from "./MenuProps";
 import Transition from "../Transition";
 
-const SubMenu: FC<SubMenuProps> = (props) => {
+export const SubMenu: FC<SubMenuProps> = (props) => {
   const { index, title, children, className, style } = props;
   const menuContextInfo = useContext(menuContext);
   const openedSubmenus = menuContextInfo.defaultOpenSubMenus as Array<string>; //defaultOpenSubMenus是一个可选参数，这里断言以便安全使用数组的includes方法
@@ -54,6 +54,7 @@ const SubMenu: FC<SubMenuProps> = (props) => {
     const subMenuClasses = classNames("submenu-con", {
       "menu-opened": menuOpen,
     });
+
     const childrenComponents = React.Children.map(
       children,
       (child, childIndex) => {
