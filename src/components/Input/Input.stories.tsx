@@ -20,11 +20,14 @@ const ControlledInput = () => {
 
 export const DefaultInput = () => {
   return (
-    <Input
-      style={{ width: "300px" }}
-      onChange={action("changed")}
-      placeholder="default input"
-    />
+    <>
+      <Input
+        style={{ width: "300px" }}
+        onChange={action("changed")}
+        placeholder="default input"
+      />
+      <ControlledInput />
+    </>
   );
 };
 DefaultInput.story = {
