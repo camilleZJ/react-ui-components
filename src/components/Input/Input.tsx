@@ -16,7 +16,7 @@ export const Input: React.FC<InputProps> = (props) => {
   // const [inputValue, setInputValue] = useState(value);
 
   const classes = classNames("input-wrapper", {
-    [`input-size-#{size}`]: size,
+    [`input-size-${size}`]: size,
     "is-disabled": disabled,
     "input-group": prepend || append,
     "input-group-append": !!append,
@@ -34,7 +34,7 @@ export const Input: React.FC<InputProps> = (props) => {
   };
 
   if ("value" in props) {  //value和defaultValue不允许同时存在
-    // delete restProps.defaultValue;
+    delete restProps.defaultValue;
     restProps.value = fixControlledValue(props.value);
   }
 

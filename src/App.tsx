@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button } from "./components/Button/Button";
 import Menu from "./components/Menu";
 import Input from "./components/Input";
-import AutoComplete from "./components/AutoComplete";
+import AutoComplete from "./components/Autocomplete";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
