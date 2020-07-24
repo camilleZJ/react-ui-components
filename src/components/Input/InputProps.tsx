@@ -17,7 +17,6 @@ type InputSize = "lg" | "sm";
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
   /**设置 input 大小，支持 lg 或 sm */
-
   size?: InputSize;
   /**是否禁用 Input */
   disabled?: boolean;
@@ -27,5 +26,5 @@ export interface InputProps
   append?: string | ReactElement;
   /**添加图标，在右侧悬浮添加一个图标，用于提示 */
   icon?: IconProp;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;  //HTMLInputElement，若是HTMLElement则拿不到event.target.value的value
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; //HTMLInputElement，若是HTMLElement则拿不到event.target.value的value
 }

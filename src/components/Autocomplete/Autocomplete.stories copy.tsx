@@ -1,5 +1,4 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import Autocomplete from "./Autocomplete";
 import { DataSourceType } from "./AutocompleteProps";
@@ -14,12 +13,12 @@ interface GithubUserProps {
   avatar_url: string;
 }
 
-// export default {
-//   title: "Autocomplete 输入建议",
-//   component: Autocomplete,
-// };
+export default {
+  title: "Autocomplete 输入建议",
+  component: Autocomplete,
+};
 
-const SimpleComplete = () => {
+export const SimpleComplete = () => {
   const lakers = [
     "bradley",
     "pope",
@@ -50,11 +49,11 @@ const SimpleComplete = () => {
     />
   );
 };
-// SimpleComplete.story = {
-//   name: "Autocomplete", //一定要和export default中的component同名才会根据注释生成文档，且组件中必须双export，否则props不会生成文档
-// };
+SimpleComplete.story = {
+  name: "Autocomplete", //一定要和export default中的component同名才会根据注释生成文档，且组件中必须双export，否则props不会生成文档
+};
 
-const ComplexComplete = () => {
+export const ComplexComplete = () => {
   const lakersWithNumber = [
     { value: "bradley", number: 11 },
     { value: "pope", number: 1 },
@@ -95,11 +94,11 @@ const ComplexComplete = () => {
     />
   );
 };
-// ComplexComplete.story = {
-//   name: "自定义下拉选项",
-// };
+ComplexComplete.story = {
+  name: "自定义下拉选项",
+};
 
-const FetchAsyncData = () => {
+export const FetchAsyncData = () => {
   const lakersWithNumber = [
     { value: "bradley", number: 11 },
     { value: "pope", number: 1 },
@@ -144,11 +143,6 @@ const FetchAsyncData = () => {
     />
   );
 };
-// FetchAsyncData.story = {
-//   name: "异步请求Github用户名",
-// };
-
-storiesOf("Autocomplete 输入建议", module)
-  .add("Autocomplete", SimpleComplete)
-  .add("自定义下拉选项", ComplexComplete)
-  .add("异步请求Github用户名", FetchAsyncData);
+FetchAsyncData.story = {
+  name: "异步请求Github用户名",
+};

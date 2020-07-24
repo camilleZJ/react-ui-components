@@ -4,10 +4,11 @@ import { InputProps } from "./InputProps";
 import Icon from "../Icon";
 
 /**
- *Input 输入框 通过鼠标或键盘输入内容，是最基础的表单域的包装。
+ * Input 输入框 通过鼠标或键盘输入内容，是最基础的表单域的包装。
  * ~~~js
  * import { Input } from 'antd-components';
  * ~~~
+ *
  * 支持 HTMLInput 的所有基本属性
  */
 //此处export是为了storybook使用的
@@ -33,7 +34,8 @@ export const Input: React.FC<InputProps> = (props) => {
     return value;
   };
 
-  if ("value" in props) {  //value和defaultValue不允许同时存在
+  if ("value" in props) {
+    //value和defaultValue不允许同时存在
     delete restProps.defaultValue;
     restProps.value = fixControlledValue(props.value);
   }

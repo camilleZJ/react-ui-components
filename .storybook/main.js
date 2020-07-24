@@ -26,13 +26,16 @@ module.exports = {
               if (prop.parent) {
                 return !prop.parent.fileName.includes("node_modules");
               }
+
               return true;
             },
           },
         },
       ],
     });
+
     config.resolve.extensions.push(".ts", ".tsx");
+
     return config;
   },
 };

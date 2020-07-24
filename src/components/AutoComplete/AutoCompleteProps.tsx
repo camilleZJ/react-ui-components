@@ -7,7 +7,9 @@ interface DataSourceObject {
 export type DataSourceType<T = {}> = T & DataSourceObject;
 
 export interface AutocompleteProps extends Omit<InputProps, "onSelect"> {
-  /** 返回输入建议的方法，可以拿到当前的输入，然后返回同步的数组或者是异步的 Promise type DataSourceType<T = {}> = T & DataSourceObject */
+  /** 返回输入建议的方法，可以拿到当前的输入，然后返回同步的数组或者是异步的 Promise 
+   *  type DataSourceType<T = {}> = T & DataSourceObject 
+  */
   fetchSuggestions: (
     str: string
   ) => DataSourceType[] | Promise<DataSourceType[]>;
