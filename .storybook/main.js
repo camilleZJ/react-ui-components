@@ -1,5 +1,8 @@
+// const path = require("path");
+// const custom = require("./webpack.config");
+
 module.exports = {
-  stories: ["../src/**/*.stories.tsx"],
+  stories: ["../src/**/*.stories.[tj]sx"],
   addons: [
     "@storybook/preset-create-react-app",
     "@storybook/addon-actions",
@@ -7,6 +10,12 @@ module.exports = {
   ],
 
   //采用新建webpack.config.js去新增webpack配置而不在这里修改
+  // webpackFinal: (config) => {
+  //   return {
+  //     ...config,
+  //     module: { ...config.module, rules: custom.module.rules },
+  //   };
+  // },
   webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.tsx?$/,
@@ -35,7 +44,6 @@ module.exports = {
     });
 
     config.resolve.extensions.push(".ts", ".tsx");
-
     return config;
   },
 };

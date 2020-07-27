@@ -11,7 +11,6 @@ module.exports = ({ config }) => {
       },
       {
         loader: require.resolve("react-docgen-typescript-loader"), //通过注释自动生成文档
-
         options: {
           shouldExtractLiteralValuesFromEnum: true, //enum展开而不是定义的enum对象名、type联合类型展开而不是别名
           propFilter: (prop) => {
@@ -28,6 +27,6 @@ module.exports = ({ config }) => {
   });
 
   config.resolve.extensions.push(".ts", ".tsx");
-
+  console.log("----------", config);
   return config;
 };

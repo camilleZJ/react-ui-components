@@ -33,42 +33,70 @@ const storyWrapper = (stroyFn: any) => (
 //   description: string, // The description of the prop
 //   defaultValue: any // The default value of the prop
 // }>
-const TableComponent = ({ propDefinitions }) => {
-  const props = propDefinitions.map(
-    ({ property, propType, required, description, defaultValue }) => {
-      return (
-        <tr key={property}>
-          <td>
-            {property}
-            {/* {required ? <Red>*</Red> : null} */}
-          </td>
-          <td>{propType.name}</td>
-          <td>{required || "-"}</td>
-          <td>{defaultValue || "-"}</td>
-          <td>{description}</td>
-        </tr>
-      );
-    }
-  );
+// const TableComponent = ({ propDefinitions }) => {
+//   const props = propDefinitions.map(
+//     ({ property, propType, required, description, defaultValue }) => {
+//       return (
+//         <tr key={property}>
+//           <td>
+//             {property}
+//             {/* {required ? <Red>*</Red> : null} */}
+//           </td>
+//           <td>{propType.name}</td>
+//           <td>{required || "-"}</td>
+//           <td>{defaultValue || "-"}</td>
+//           <td>{description}</td>
+//         </tr>
+//       );
+//     }
+//   );
 
-  return (
-    <table className="info-table">
-      <thead>
-        <tr>
-          <th>name</th>
-          <th>type</th>
-          <th>required</th>
-          <th>default</th>
-          <th>description</th>
-        </tr>
-      </thead>
-      <tbody>{props}</tbody>
-    </table>
-  );
-};
+//   return (
+//     <table className="info-table">
+//       <thead>
+//         <tr>
+//           <th>name</th>
+//           <th>type</th>
+//           <th>required</th>
+//           <th>default</th>
+//           <th>description</th>
+//         </tr>
+//       </thead>
+//       <tbody>{props}</tbody>
+//     </table>
+//   );
+// };
 
 addDecorator(storyWrapper);
 addDecorator(withInfo);
-addParameters({ info: { inline: true, header: false, TableComponent } });
+addParameters({
+  info: {
+    inline: true,
+    header: false,
+    // styles: {
+    //   header: {
+    //     h1: {
+    //       marginRight: "20px",
+    //       fontSize: "25px",
+    //       display: "inline",
+    //     },
+    //     body: {
+    //       paddingTop: 0,
+    //       paddingBottom: 0,
+    //     },
+    //     h2: {
+    //       display: "inline",
+    //       color: "#999",
+    //     },
+    //   },
+    //   infoBody: {
+    //     backgroundColor: "#eee",
+    //     padding: "0px 5px",
+    //     lineHeight: "2",
+    //   },
+    // },
+  },
+});
+// addParameters({ info: { inline: true, header: false, TableComponent } });
 
 configure(require.context("../src", true, /\.stories\.tsx$/), module);
