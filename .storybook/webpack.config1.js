@@ -27,6 +27,6 @@ module.exports = ({ config }) => {
   });
 
   config.resolve.extensions.push(".ts", ".tsx");
-  console.log("----------", config);
+  
   return config;
 };

@@ -4,6 +4,8 @@ import { Button } from "./components/Button/Button";
 import Menu from "./components/Menu";
 import Input from "./components/Input";
 import AutoComplete from "./components/Autocomplete";
+import Upload from "./components/Upload";
+import { UploadFile } from "./components/Upload/UploadProps";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -42,6 +44,25 @@ function App() {
 
   const renderOptions = (item: string) => {
     return <h2>Name: {item}</h2>;
+  };
+
+  const renameUploadFile = (file: File) => {
+    const newFile = new File([file], "new_name.docx", { type: file.type });
+    return Promise.resolve(newFile);
+  };
+
+  const fileChanged = (file: UploadFile) => {
+    console.log("changed：" + file);
+  };
+
+  const checkFileSize = (file: File) => {
+    if (Math.round(file.size / 1024) > 50) {
+      //>50kb
+      alert("file too big");
+      return false;
+    }
+
+    return true;
   };
 
   // function appendCom() {
@@ -128,14 +149,33 @@ function App() {
       </section>
 
       <section className="autoComplete-con">
-        <AutoComplete
+        {/* <AutoComplete
           fetchSuggestions={handleFetch}
           onSelect={handleSelect}
           renderOptions={renderOptions}
-        />
+        /> */}
       </section>
 
-      <section className="upload-con"></section>
+      <section className="upload-con">
+        <Upload
+          action="https://jsonplaceholder.typicode.com/posts/"
+          onProgress={(progress: number) => console.log("Progress:" + progress)}
+          onSuccess={(data: any) => console.log("Success:" + data)}
+          onError={(error: any) => console.log("Error:" + error)}
+        />
+
+        <Upload
+          action="https://jsonplaceholder.typicode.com/posts/"
+          onChange={fileChanged}
+          beforeUpload={checkFileSize}
+        />
+
+        <Upload
+          action="https://jsonplaceholder.typicode.com/posts/"
+          onChange={fileChanged}
+          beforeUpload={renameUploadFile}
+        />
+      </section>
     </article>
   );
 }

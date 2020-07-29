@@ -7,6 +7,18 @@ module.exports = {
     "@storybook/preset-create-react-app",
     "@storybook/addon-actions",
     "@storybook/addon-links",
+    // {
+    //   name: "@storybook/addon-storysource",
+    //   options: {
+    //     rule: {
+    //       // test: [/\.stories\.jsx?$/], This is default
+    //       include: [path.resolve(__dirname, "../stories")], // 找到自己存放stories的文件夹
+    //     },
+    //     loaderOptions: {
+    //       prettierConfig: { printWidth: 80, singleQuote: false },
+    //     },
+    //   },
+    // },
   ],
 
   //采用新建webpack.config.js去新增webpack配置而不在这里修改
@@ -17,6 +29,8 @@ module.exports = {
   //   };
   // },
   webpackFinal: async (config) => {
+    console.log("+++++++++++++++++", config);
+
     config.module.rules.push({
       test: /\.tsx?$/,
       use: [
