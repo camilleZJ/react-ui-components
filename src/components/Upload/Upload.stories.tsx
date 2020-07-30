@@ -3,6 +3,7 @@ import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 import { Upload } from "./Upload";
 import { UploadFile } from "./UploadProps";
+import Icon from "../Icon";
 
 const checkFileSize = (file: File) => {
   if (Math.round(file.size / 1024) > 50) {
@@ -88,6 +89,21 @@ export const uploadWidthProps = () => {
 };
 uploadWidthProps.story = {
   name: "设置不同属性的 upload",
+};
+
+export const dragToUpload = () => {
+  return (
+    <Upload
+      action="https://run.mocky.io/v3/8030edf2-b85e-4866-baca-1374302140e9"
+      name="fileName"
+      multiple
+      drag
+    >
+      <Icon icon="upload" size="5x" theme="secondary" />
+      <br />
+      <p>点击或者拖动到此区域进行上传</p>
+    </Upload>
+  );
 };
 
 storiesOf("Upload 上传", module)

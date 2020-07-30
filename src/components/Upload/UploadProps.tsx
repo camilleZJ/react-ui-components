@@ -44,11 +44,19 @@ export interface UploadProps {
   data?: { [key: string]: any };
   /** 支持发送 cookie 凭证信息 */
   withCredentials?: boolean;
+  /** 指定上传的文件类型 */
   accept?: string;
+  /** 是否支持多选文件 */
   multiple?: boolean;
+  /** 是否支持拖拽上传 */
+  drag?: boolean;
 }
 
 export interface UploadListProps {
   fileList: UploadFile[];
   onRemove: (file: UploadFile) => void;
+}
+
+export interface DraggerProps {
+  onFile: (files: FileList) => void;
 }
