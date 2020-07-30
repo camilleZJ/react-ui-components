@@ -42,9 +42,9 @@ export const SimpleUpload = () => {
     />
   );
 };
-// SimpleUpload.story = {
-//   name: "Upload",
-// };
+SimpleUpload.story = {
+  name: "Upload",
+};
 
 export const checkFileSizeUpload = () => {
   return (
@@ -56,9 +56,9 @@ export const checkFileSizeUpload = () => {
     />
   );
 };
-// checkFileSizeUpload.story={
-//     name: "上传前检查文件大小"
-// }
+checkFileSizeUpload.story = {
+  name: "上传前检查文件大小",
+};
 
 export const uploadWithDefaultUploadList = () => {
   return (
@@ -70,14 +70,31 @@ export const uploadWithDefaultUploadList = () => {
     />
   );
 };
-// uploadWithDefaultUploadList.story={
-//     name:"带有默认上传列表的 Upload"
-// }
+uploadWithDefaultUploadList.story = {
+  name: "带有默认上传列表的 Upload",
+};
+
+export const uploadWidthProps = () => {
+  return (
+    <Upload
+      action="https://run.mocky.io/v3/8030edf2-b85e-4866-baca-1374302140e9"
+      name="fileName"
+      data={{ key: "value" }}
+      headers={{ "X-Powered-By": "Camille" }}
+      accept={".jpg"}
+      multiple
+    />
+  );
+};
+uploadWidthProps.story = {
+  name: "设置不同属性的 upload",
+};
 
 storiesOf("Upload 上传", module)
   .add("Upload", SimpleUpload)
   .add("上传前检查文件大小", checkFileSizeUpload)
-  .add("带有默认上传列表的 Upload", uploadWithDefaultUploadList);
+  .add("带有默认上传列表的 Upload", uploadWithDefaultUploadList)
+  .add("设置不同属性的 upload", uploadWidthProps);
 
 // export default {
 //   title: "Upload 上传",

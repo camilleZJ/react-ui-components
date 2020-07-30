@@ -13,9 +13,28 @@
 .info-table {
   width: 100%;
   @extend %table-sty;
-  
+
   td,
   th {
     @extend %table-sty;
+  }
+}
+
+.example-con {
+  width: 400px;
+  padding: 10px;
+
+  > * {
+    margin-bottom: 15px;
+  }
+}
+
+.example-inline-con {
+  display: flex;
+  flex-wrap: wrap;
+
+  > * {
+    flex: none;
+    margin-right: 15px;
   }
 }

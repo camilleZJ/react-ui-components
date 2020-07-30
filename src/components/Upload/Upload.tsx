@@ -21,6 +21,12 @@ export const Upload: FC<UploadProps> = (props) => {
     onChange,
     defaultFileList,
     onRemove,
+    headers,
+    name,
+    data,
+    withCredentials,
+    accept,
+    multiple,
   } = props;
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
@@ -71,7 +77,7 @@ export const Upload: FC<UploadProps> = (props) => {
     setFileList((prevList) => {
       return prevList.map((file) => {
         if (file.uid === updateFile.uid) {
-          return { ...file, updateObj };
+          return { ...file, ...updateObj };
         } else {
           return file;
         }
@@ -94,59 +100,63 @@ export const Upload: FC<UploadProps> = (props) => {
     });
 
     const formData = new FormData();
-    formData.append(file.name, file);
+    formData.append(name || "file", file);
+    if (data) {
+      Object.keys(data).forEach((key) => {
+        formData.append(key, data[key]);
+      });
+    }
     axios
       .post(action, formData, {
         headers: {
+          ...headers,
           "Content-Type": "multipart/form-data",
         },
+        withCredentials,
         onUploadProgress: (e) => {
-          console.log("onUploadProgress", e);
           let percentage = Math.round((e.loaded * 100) / e.total) || 0;
           if (percentage < 100) {
             //修改上传进度
 
-            updateFileList(_file, {
+            const updateObj: Partial<UploadFile> = {
               percent: percentage,
               status: "uploading",
-            });
-
-            _file.percent = percentage;
-            _file.status = "uploading";
+            };
+            updateFileList(_file, updateObj);
             if (onProgress) {
-              onProgress(percentage, _file);
+              onProgress(percentage, { ..._file, ...updateObj });
             }
           }
         },
       })
       .then((resp) => {
-        updateFileList(_file, {
+        const updateObj: Partial<UploadFile> = {
           status: "success",
           response: resp.data,
-        });
+        };
+        updateFileList(_file, updateObj);
 
-        // (_file.response = resp.data), (_file.status = "success");
-
+        const newFile = { ..._file, ...updateObj };
         if (onSuccess) {
-          onSuccess(resp, _file);
+          onSuccess(resp, newFile);
         }
         if (onChange) {
-          onChange(_file);
+          onChange(newFile);
         }
       })
       .catch((error) => {
-        updateFileList(_file, {
+        const updateObj: Partial<UploadFile> = {
           status: "error",
           error,
-        });
+        };
+        updateFileList(_file, updateObj);
 
-        // (_file.error = error), (_file.status = "error");
-
+        const newFile = { ..._file, ...updateObj };
         if (onError) {
-          onError(error, _file);
+          onError(error, newFile);
         }
         if (onChange) {
-          onChange(_file);
+          onChange(newFile);
         }
       });
   };
@@ -171,10 +181,16 @@ export const Upload: FC<UploadProps> = (props) => {
         ref={fileInput}
         onChange={handleFileChange}
         style={{ display: "none" }}
+        accept={accept}
+        multiple={multiple}
       />
       <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   );
+};
+
+Upload.defaultProps = {
+  name: "file",
 };
 
 export default Upload;

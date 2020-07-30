@@ -1,23 +1,20 @@
+$ring-border-width: 8px;
+%ring {
+  border: $ring-border-width solid $progress-bg;
+  border-radius: 50%;
+}
+
 .progress-bar {
   width: 100%;
   box-sizing: border-box;
 
   .progress-bar-outer {
-    border-radius: $progress-border-radius;
-    background-color: $progress-bg;
-    overflow: hidden;
     position: relative;
   }
 
   .progress-bar-inner {
     position: absolute;
-    left: 0;
-    top: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
     height: 100%;
-    border-radius: $progress-border-radius;
     line-height: 1;
     transition: $progress-bar-transition;
 
@@ -29,8 +26,59 @@
   }
 
   @each $key, $val in $theme-colors {
+    .circle-color-#{$key} {
+      .progress-bar-inner {
+        border-color: $val;
+      }
+    }
+  }
+}
+
+.line-progress-bar {
+  overflow: hidden;
+  border-radius: $progress-border-radius;
+  background-color: $progress-bg;
+
+  @each $key, $val in $theme-colors {
     .color-#{$key} {
       background-color: $val;
     }
+  }
+
+  .progress-bar-inner {
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: $progress-border-radius;
+  }
+}
+
+.circle-progress-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @extend %ring;
+
+  .progress-bar-inner-con {
+    position: absolute;
+    left: -$ring-border-width;
+    top: -$ring-border-width;
+    width: 100%;
+    height: 100%;
+    box-sizing: content-box;
+    border-radius: 50%;
+  }
+
+  .progress-bar-inner {
+    width: 100%;
+    box-sizing: content-box;
+    @extend %ring;
+  }
+
+  .left-bar {
+    transition: transform ease;
   }
 }
