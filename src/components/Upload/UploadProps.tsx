@@ -50,6 +50,10 @@ export interface UploadProps {
   multiple?: boolean;
   /** 是否支持拖拽上传 */
   drag?: boolean;
+  /**  */
+  onPreview?: (file: UploadFile) => void;
+  /** 文件列表的类型 */
+  listType?: "text" | "picture";
 }
 
 export interface UploadListProps {

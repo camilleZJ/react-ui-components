@@ -30,6 +30,7 @@ export const Upload: FC<UploadProps> = (props) => {
     multiple,
     children,
     drag,
+    listType
   } = props;
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
@@ -173,8 +174,10 @@ export const Upload: FC<UploadProps> = (props) => {
     }
   };
 
+  console.log(children);
+
   return (
-    <div className="upload-conponent">
+    <div className="upload-component">
       {/* <Button btnType="primary" onClick={handleClick}>
         click to upload
       </Button> */}
@@ -206,6 +209,7 @@ export const Upload: FC<UploadProps> = (props) => {
 
 Upload.defaultProps = {
   name: "file",
+  listType: "text",
 };
 
 export default Upload;
