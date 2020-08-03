@@ -1,4 +1,6 @@
 export type UploadFileStatus = "ready" | "uploading" | "success" | "error";
+export type listType = "text" | "picture";
+// export type thumbType = ArrayBuffer | string; //ArrayBuffer 对象用来表示通用的、固定长度的原始二进制数据缓冲区。
 
 export interface UploadFile {
   /** 上传文件的唯一标识 */
@@ -17,6 +19,8 @@ export interface UploadFile {
   response?: any;
   /** 上传失败的错误信息 */
   error?: any;
+  /** 上传文件缩略图 */
+  thumbnail?: string;
 }
 
 export interface UploadProps {
@@ -53,12 +57,13 @@ export interface UploadProps {
   /**  */
   onPreview?: (file: UploadFile) => void;
   /** 文件列表的类型 */
-  listType?: "text" | "picture";
+  listType?: listType;
 }
 
 export interface UploadListProps {
   fileList: UploadFile[];
   onRemove: (file: UploadFile) => void;
+  type?: listType;
 }
 
 export interface DraggerProps {

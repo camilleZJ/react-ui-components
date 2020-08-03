@@ -1,7 +1,7 @@
 import React, { FC, useRef, useState, ChangeEvent, Children } from "react";
 import axios from "axios";
 import { UploadProps, UploadFile } from "./UploadProps";
-import Button from "../Button";
+// import Button from "../Button";
 import UploadList from "./UploadList";
 import Dragger from "./Dargger";
 
@@ -30,7 +30,7 @@ export const Upload: FC<UploadProps> = (props) => {
     multiple,
     children,
     drag,
-    listType
+    listType,
   } = props;
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
@@ -59,15 +59,15 @@ export const Upload: FC<UploadProps> = (props) => {
 
     postFiles.forEach((file) => {
       if (!beforeUpload) {
-        post(file);
+        dealUpload(file);
       } else {
         const result = beforeUpload(file);
         if (result && result instanceof Promise) {
           result.then((processedFlie) => {
-            post(processedFlie);
+            dealUpload(processedFlie);
           });
         } else if (result !== false) {
-          post(file);
+          dealUpload(file);
         }
       }
     });
@@ -89,7 +89,20 @@ export const Upload: FC<UploadProps> = (props) => {
     });
   };
 
-  const post = (file: File) => {
+  const dealUpload = (file: File) => {
+    const fr = new FileReader();
+    fr.onload = function (evt) {
+      post(file, evt?.target?.result?.toString() || "");
+    };
+    fr.onerror = function (event) {
+      alert("Failed to read file!\n\n" + fr.error);
+      fr.abort();
+      post(file);
+    };
+    fr.readAsDataURL(file);
+  };
+
+  const post = (file: File, thumbnail: string = "") => {
     let _file: UploadFile = {
       uid: Date.now() + "upload-file",
       status: "ready",
@@ -97,7 +110,9 @@ export const Upload: FC<UploadProps> = (props) => {
       size: file.size,
       percent: 0,
       raw: file,
+      thumbnail,
     };
+
     // setFileList([...fileList, _file]);
     setFileList((prevList) => {
       return [...prevList, _file];
@@ -202,7 +217,7 @@ export const Upload: FC<UploadProps> = (props) => {
         />
       </div>
 
-      <UploadList fileList={fileList} onRemove={handleRemove} />
+      <UploadList fileList={fileList} type={listType} onRemove={handleRemove} />
     </div>
   );
 };

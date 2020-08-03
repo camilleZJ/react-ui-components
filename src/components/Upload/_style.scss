@@ -10,7 +10,7 @@
   position: relative;
   margin-top: 5px;
   box-sizing: border-box;
-  border-radius: 4px;
+
   min-width: 200px;
 
   font-size: 14px;
@@ -21,10 +21,8 @@
   }
 
   .file-name {
-    margin-left: 5px;
-    margin-right: 40px;
     svg {
-      margin-right: 5px;
+      margin-right: 10px;
       color: $gray-500;
     }
   }
@@ -39,9 +37,6 @@
   .file-status {
     display: block;
     position: absolute;
-    right: 5px;
-    top: 0;
-    line-height: inherit;
   }
 
   .file-actions {
@@ -54,13 +49,103 @@
   }
 
   &:hover {
-    background-color: $gray-200;
     .file-status {
       display: none;
     }
     .file-actions {
       display: block;
     }
+  }
+}
+
+.text-item {
+  border-radius: 4px;
+
+  .file-name {
+    margin-left: 5px;
+    margin-right: 40px;
+  }
+
+  .file-status {
+    right: 5px;
+    top: 0;
+    line-height: inherit;
+  }
+
+  &:hover {
+    background-color: $gray-200;
+  }
+}
+
+.picture-item {
+  overflow: hidden;
+  background-color: $white;
+  border: 1px solid $gray-500;
+  border-radius: 6px;
+  padding: 0 20px;
+  height: 92px;
+
+  .file-name {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    > span {
+      line-height: 92px;
+    }
+  }
+
+  .uploading-con {
+    padding: 0;
+    margin: 0;
+    flex: 1;
+  }
+
+  .thumbnail {
+    // vertical-align: middle;
+    // display: inline-block;
+    float: left;
+    width: 70px;
+    height: 70px;
+    position: relative;
+    z-index: 1;
+    margin-right: 10px;
+  }
+
+  .danger-status,
+  .success-status {
+    right: -17px;
+    top: -7px;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    line-height: 34px;
+    transform: rotate(45deg);
+    box-shadow: 0 1px 1px #ccc;
+
+    svg {
+      vertical-align: middle;
+    }
+  }
+
+  .success-status {
+    background-color: $success;
+
+    svg {
+      transform: rotate(-60deg);
+    }
+  }
+
+  .danger-status {
+    background-color: $danger;
+
+    svg {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &:hover {
+    color: $primary;
   }
 }
 
