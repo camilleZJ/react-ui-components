@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React, { FC } from "react";
 import classNames from "classnames";
 import { InputProps } from "./InputProps";
 import Icon from "../Icon";
 
 /**
  * Input 输入框 通过鼠标或键盘输入内容，是最基础的表单域的包装。
+ *
  * ~~~js
  * import { Input } from 'antd-components';
  * ~~~
  *
  * 支持 HTMLInput 的所有基本属性
  */
-//此处export是为了storybook使用的
-export const Input: React.FC<InputProps> = (props) => {
-  const { size, disabled, prepend, append, icon, style, ...restProps } = props;
+export const Input: FC<InputProps> = (props) => {
+  //此处export是为了storybook使用的
   // const [inputValue, setInputValue] = useState(value);
 
-  const classes = classNames("input-wrapper", {
+  const { size, disabled, prepend, append, icon, style, ...restProps } = props;
+  const cnames = classNames("input-wrapper", {
     [`input-size-${size}`]: size,
     "is-disabled": disabled,
     "input-group": prepend || append,
@@ -33,7 +34,6 @@ export const Input: React.FC<InputProps> = (props) => {
 
     return value;
   };
-
   if ("value" in props) {
     //value和defaultValue不允许同时存在
     delete restProps.defaultValue;
@@ -41,7 +41,7 @@ export const Input: React.FC<InputProps> = (props) => {
   }
 
   return (
-    <div className={classes} style={style}>
+    <div className={cnames} style={style}>
       {prepend && <div className="input-group-prepend-con">{prepend}</div>}
       {icon && (
         <div className="icon-wrapper">

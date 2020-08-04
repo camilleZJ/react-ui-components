@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+// import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import Input from "./index";
+import { Input } from "./Input";
 
 export default {
   title: "Input 输入框",
@@ -87,3 +88,5 @@ export const pendInput = () => {
 pendInput.story = {
   name: "带前后缀的 Input",
 };
+
+// storiesOf("Input 输入框", module).add("被禁用的 Input", disabledInput);

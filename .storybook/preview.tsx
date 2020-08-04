@@ -73,28 +73,28 @@ addParameters({
   info: {
     inline: true,
     header: false,
-    // styles: {
-    //   header: {
-    //     h1: {
-    //       marginRight: "20px",
-    //       fontSize: "25px",
-    //       display: "inline",
-    //     },
-    //     body: {
-    //       paddingTop: 0,
-    //       paddingBottom: 0,
-    //     },
-    //     h2: {
-    //       display: "inline",
-    //       color: "#999",
-    //     },
-    //   },
-    //   infoBody: {
-    //     backgroundColor: "#eee",
-    //     padding: "0px 5px",
-    //     lineHeight: "2",
-    //   },
-    // },
+    styles: {
+      // header: {
+      //   h1: {
+      //     marginRight: "20px",
+      //     fontSize: "25px",
+      //     display: "inline",
+      //   },
+      //   body: {
+      //     paddingTop: 0,
+      //     paddingBottom: 0,
+      //   },
+      //   h2: {
+      //     display: "inline",
+      //     color: "#999",
+      //   },
+      // },
+      // infoBody: {
+      //   backgroundColor: "#eee",
+      //   padding: "0px 5px",
+      //   lineHeight: "2",
+      // },
+    },
   },
 });
 // addParameters({ info: { inline: true, header: false, TableComponent } });

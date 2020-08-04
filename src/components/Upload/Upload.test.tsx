@@ -1,7 +1,13 @@
 import "@testing-library/jest-dom/extend-expect";
 import React from "react";
 import axios from "axios";
-import { render, RenderResult, fireEvent, wait } from "@testing-library/react";
+import {
+  render,
+  RenderResult,
+  fireEvent,
+  wait,
+  createEvent,
+} from "@testing-library/react";
 import { Upload } from "./Upload";
 import { UploadProps } from "./UploadProps";
 
@@ -48,13 +54,25 @@ describe("test upload component", () => {
     expect(uploadArea).toBeInTheDocument();
     expect(fileInput).not.toBeVisible();
     fireEvent.change(fileInput, { target: { files: [testFile] } });
-    expect(queryByText("spinner")).toBeInTheDocument();
+    // expect(queryByText("spinner")).toBeInTheDocument();
     await wait(() => {
       expect(queryByText("test.png")).toBeInTheDocument();
     });
     expect(queryByText("check-circle")).toBeInTheDocument();
-    expect(testProps.onSuccess).toHaveBeenCalledWith({ data: "cool" });
-    expect(testProps.onChange).toHaveBeenCalledWith(testFile);
+    expect(testProps.onSuccess).toHaveBeenCalledWith(
+      { data: "cool" },
+      expect.objectContaining({
+        status: "success",
+        response: "cool",
+      })
+    );
+    expect(testProps.onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        status: "success",
+        response: "cool",
+        raw: testFile,
+      })
+    );
 
     //remove the uploaded file
     const removeElement = queryByText("times") as HTMLElement;
@@ -71,9 +89,32 @@ describe("test upload component", () => {
     );
   });
 
-  it("", () => {});
-  it("", () => {});
-  it("", () => {});
+  it("drag and drop files should works fine", async () => {
+    fireEvent.dragOver(uploadArea);
+    expect(uploadArea).toHaveClass("is-dragger");
+    fireEvent.dragLeave(uploadArea);
+    expect(uploadArea).not.toHaveClass("is-dragger");
 
-  it("drag and drop files should works fine", () => {});
+    //报错：fireEvent.drop不包含event.dataTransfer
+    // fireEvent.drop(uploadArea, { dataTransfer: { files: [testFile] } });
+    const mockDropEvent = createEvent.drop(uploadArea);
+    Object.defineProperty(mockDropEvent, "dataTransfer", {
+      value: {
+        files: [testFile],
+      },
+    });
+    fireEvent(uploadArea, mockDropEvent); //先触发uploadArea再触发mockDropEvent
+
+    await wait(() => {
+      expect(wrapper.queryByText("test.png")).toBeInTheDocument();
+    });
+    expect(testProps.onSuccess).toHaveBeenCalledWith(
+      { data: "cool" },
+      expect.objectContaining({
+        raw: testFile,
+        name: "test.png",
+        status: "success",
+      })
+    );
+  });
 });

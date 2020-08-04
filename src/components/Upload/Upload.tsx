@@ -189,8 +189,6 @@ export const Upload: FC<UploadProps> = (props) => {
     }
   };
 
-  console.log(children);
-
   return (
     <div className="upload-component">
       {/* <Button btnType="primary" onClick={handleClick}>
