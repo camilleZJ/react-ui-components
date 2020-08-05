@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "build", //编译输出路径
+    "module": "esnext", //输出模块类型  esnext即ES6 module
+    "target": "es5",
+    "declaration": true, //每个文件生成.d.ts文件，这样用户使用就可以自动提示和类型检查
+    "jsx": "react", //jsx为React.createElement()方法的缩写，此处是编译之后可以用React.createElement方法代替jsx
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true
+  },
+
+  "include": ["src"],
+  "exclude": ["src/**/*.test.tsx", "src/**/*.stories.tsx"] //**代表任意程度
+}
