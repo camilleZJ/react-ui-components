@@ -6,6 +6,15 @@ cache:
   - node_modules
 env:
   - CI=true
-
+script: 
+  - npm run build-storybook
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  #keep_history: true
+  local_dir: storybook-static #上传的文件夹，默认是build文件夹
+  on:
+    branch: test1 #master--上传的分支
   
   
