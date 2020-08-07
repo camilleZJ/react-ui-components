@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "outDir": "build", //编译输出路径
+    "outDir": "dist", //编译输出路径 build是构建目录  dist发布组件目录
     "module": "esnext", //输出模块类型  esnext即ES6 module
     "target": "es5",
     "declaration": true, //每个文件生成.d.ts文件，这样用户使用就可以自动提示和类型检查
     "jsx": "react", //jsx为React.createElement()方法的缩写，此处是编译之后可以用React.createElement方法代替jsx
-    "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true
+    "moduleResolution": "Node",  //模块间的关系，引入的模块路径寻找，默认的方式绝对路径的模块一层层向上找直到根目录，不回去node_modules中寻找
+    "allowSyntheticDefaultImports": true //默认为false 不支持import 导入export default导出的模块，只能import * as 别名 from 路径
   },
 
   "include": ["src"],

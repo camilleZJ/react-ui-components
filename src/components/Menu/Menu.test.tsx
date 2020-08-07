@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  render,
-  fireEvent,
-  RenderResult,
-  cleanup,
-  wait,
-} from "@testing-library/react";
+import { render, fireEvent, RenderResult, wait } from "@testing-library/react";
 import Menu from "./Menu";
 import Submenu from "./Submenu";
 import MenuItem from "./MenuItem";
@@ -102,8 +96,8 @@ describe("test Menu and MenuItem component in default(horizontal) mode", () => {
   });
 
   it("should show dropdown items when hover on subMenu", async () => {
-    const dropdownItemElement = wrapper.queryByText("hide submenu 1");
-    expect(dropdownItemElement).not.toBeVisible(); //display:none
+    // expect(wrapper.queryByText("hide submenu 1")).not.toBeVisible(); //display:none
+    expect(wrapper.queryByText("hide submenu 1")).not.toBeInTheDocument();
 
     const dropdownElement = wrapper.getByText("dropdown");
     // expect(dropdownElement.parentNode).toBeInTheDocument();
@@ -111,7 +105,7 @@ describe("test Menu and MenuItem component in default(horizontal) mode", () => {
     // expect(dropdownItemElement).toBeVisible();  //源代码中mouseEnter触发的代码：setTimeout(() => {setOpen(toggle);}, 300);断言是立马执行的  不会等300ms。所以received的结果是not visible
     //所以采用async await+wait，react-testing-lirary的wait解决异步问题
     await wait(() => {
-      expect(dropdownItemElement).toBeVisible();
+      expect(wrapper.queryByText("hide submenu 1")).toBeVisible();
     });
     const ItemElement = wrapper.getByText("hide submenu 1");
     fireEvent.click(ItemElement); //注意：queryByText和getByText区别
@@ -119,7 +113,7 @@ describe("test Menu and MenuItem component in default(horizontal) mode", () => {
 
     fireEvent.mouseLeave(dropdownElement);
     await wait(() => {
-      expect(dropdownItemElement).not.toBeVisible();
+      expect(wrapper.queryByText("hide submenu 1")).not.toBeVisible();
     });
   });
 });
@@ -142,12 +136,12 @@ describe("test Menu and MenuItem component in vertical mode", () => {
   });
 
   it("should show dropdown items when click on subMenu for vertical mode", () => {
-    const itemElement = wrapper2.queryByText("hide submenu 1");
-    expect(itemElement).not.toBeVisible();
+    // expect(wrapper2.queryByText("hide submenu 1")).not.toBeVisible();
+    expect(wrapper2.queryByText("hide submenu 1")).not.toBeInTheDocument();
 
     const dropdownTitle = wrapper2.getByText("dropdown");
     fireEvent.click(dropdownTitle);
-    expect(itemElement).toBeVisible();
+    expect(wrapper2.queryByText("hide submenu 1")).toBeVisible();
   });
 
   it("should show subMenu dropdown when defaultOpenSubMenus contains SubMenu index", () => {

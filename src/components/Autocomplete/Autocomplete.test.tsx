@@ -51,12 +51,13 @@ describe("", () => {
   it("should provide keyboard support", async () => {
     // input change
     fireEvent.change(inputNode, { target: { value: "a" } });
-    const firstItem = wrapper.queryByText("ab");
-    const secondItem = wrapper.queryByText("abc");
     await wait(() => {
-      expect(firstItem).toBeInTheDocument();
+      //这个是异步操作，所有等待操作完成才能去获取：wrapper.queryByText("ab")
+      expect(wrapper.queryByText("ab")).toBeInTheDocument();
     });
 
+    const firstItem = wrapper.queryByText("ab");
+    const secondItem = wrapper.queryByText("abc");
     // arrow down
     fireEvent.keyDown(inputNode, { keyCode: 40 });
     expect(firstItem).toHaveClass("is-active");
@@ -80,13 +81,12 @@ describe("", () => {
 
   it("click outside should hide the dropdown", async () => {
     fireEvent.change(inputNode, { target: { value: "a" } });
-    const firstItem = wrapper.queryByText("ab");
     await wait(() => {
-      expect(firstItem).toBeInTheDocument();
+      expect(wrapper.queryByText("ab")).toBeInTheDocument();
     });
 
     fireEvent.click(document);
-    expect(firstItem).not.toBeInTheDocument();
+    expect(wrapper.queryByText("ab")).not.toBeInTheDocument();
   });
 
   it("renderOption should generate the right template", () => {});

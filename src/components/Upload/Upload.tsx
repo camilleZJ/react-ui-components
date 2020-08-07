@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState, ChangeEvent, Children } from "react";
+import React, { FC, useRef, useState, ChangeEvent } from "react";
 import axios from "axios";
 import { UploadProps, UploadFile } from "./UploadProps";
 // import Button from "../Button";
@@ -9,7 +9,7 @@ import Dragger from "./Dargger";
  * 通过点击或者拖拽上传文件控件
  * ### 引用方法
  * ~~~js
- * import { Upload } from 'antd-components'
+ * import { Upload } from 'react-ui-components-pkg'
  * ~~~
  */
 export const Upload: FC<UploadProps> = (props) => {
@@ -36,7 +36,6 @@ export const Upload: FC<UploadProps> = (props) => {
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e, e.target);
     const files = e.target.files;
     if (!files) {
       return;

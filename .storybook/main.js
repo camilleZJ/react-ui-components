@@ -29,8 +29,6 @@ module.exports = {
   //   };
   // },
   webpackFinal: async (config) => {
-    console.log("+++++++++++++++++", config);
-
     config.module.rules.push({
       test: /\.tsx?$/,
       use: [

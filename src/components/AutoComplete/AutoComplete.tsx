@@ -20,7 +20,7 @@ import Transition from "../Transition";
  * ### 引用方法
  *
  * ~~~js
- * import { Autocomplete } from 'antd-components'
+ * import { Autocomplete } from 'react-ui-components-pkg'
  * ~~~
  */
 export const Autocomplete: FC<AutocompleteProps> = (props) => {

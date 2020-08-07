@@ -1,5 +1,5 @@
 import React from "react";
-import { render, RenderResult, cleanup } from "@testing-library/react";
+import { render, RenderResult } from "@testing-library/react";
 import { Progress } from "./Progress";
 import { ProgressProps } from "./ProgressProps";
 

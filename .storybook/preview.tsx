@@ -101,9 +101,19 @@ addParameters({
 
 // configure(require.context("../src", true, /\.stories\.tsx$/), module);
 const loaderFn = () => {
-  const allExports = [require("../src/welcome.stories.tsx")];
+  const allExports = [
+    require("../src/welcome.stories.tsx"),
+    // require("../src/components/Button/button.stories"),
+    // require("../src/components/Menu/Menu.stories"),
+    // require("../src/components/Icon/Icon.stories"),
+    // require("../src/components/Input/Input.stories"),
+    // require("../src/components/Autocomplete/Autocomplete.stories"),
+    // require("../src/components/Progress/Progress.stories"),
+    // require("../src/components/Upload/Upload.stories"),
+  ];
   const req = require.context("../src/components", true, /\.stories\.tsx?$/);
   req.keys().forEach((fname) => allExports.push(req(fname)));
+
   return allExports;
 };
 

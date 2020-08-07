@@ -1,12 +1,11 @@
 import React, { FC } from "react";
 import { ProgressProps } from "./ProgressProps";
-import { Transform } from "stream";
 
 /**
  * 展示操作的当前进度。
  * ### 引用方法
  * ~~~js
- * import { Progress } from 'antd-components'
+ * import { Progress } from 'react-ui-components-pkg'
  * ~~~
  */
 export const Progress: FC<ProgressProps> = (props) => {
