@@ -23,7 +23,7 @@ storiesOf("Welcome", module).add(
           <pre
             dangerouslySetInnerHTML={{
               __html:
-                " // 引入组件 <br />import { Button } from 'react-ui-components-pkg",
+                " // 引入组件 <br />import { Button } from 'react-ui-components-pkg'",
             }}
           ></pre>
         </code>
