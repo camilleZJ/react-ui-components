@@ -13,6 +13,7 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
   #keep_history: true
+  #target_branch: master  #提交到主分支
   local_dir: storybook-static #上传的文件夹，默认是build文件夹
   on:
     branch: dev #master--上传的分支
