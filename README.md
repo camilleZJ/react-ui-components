@@ -2,6 +2,10 @@
 
 基于React Hooks + typescript 为 Web 应用提供了基础的 UI 组件，本组件库还将持续探索企业级应用的最佳 UI 实践。欢迎提供精选组件作为必要的补充。
 
+## 示例
+<!-- ![image]() -->
+You can learn more in the [react-ui-components documentation](https://camilleZJ.github.io/react-ui-components)
+
 ## Installation
 
 install the following npm module:
