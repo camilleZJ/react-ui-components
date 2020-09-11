@@ -1,4 +1,9 @@
-import { ReactElement, InputHTMLAttributes, ChangeEvent } from "react";
+import {
+  ReactElement,
+  InputHTMLAttributes,
+  ChangeEvent,
+  RefObject,
+} from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 type InputSize = "lg" | "sm";
@@ -28,4 +33,5 @@ export interface InputProps
   /**添加后缀 用于配置一些固定组合 */
   append?: string | ReactElement;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  // ref?: RefObject<HTMLInputElement>;
 }

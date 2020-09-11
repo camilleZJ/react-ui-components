@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, RefObject } from "react";
 import classNames from "classnames";
 import { InputProps } from "./InputProps";
 import Icon from "../Icon";
@@ -12,7 +12,9 @@ import Icon from "../Icon";
  *
  * 支持 HTMLInput 的所有基本属性
  */
-export const Input: FC<InputProps> = (props) => {
+export const Input: FC<
+  InputProps & { ref: React.Ref<HTMLInputElement> }
+> = React.forwardRef((props, ref) => {
   //此处export是为了storybook使用的
   // const [inputValue, setInputValue] = useState(value);
 
@@ -48,10 +50,15 @@ export const Input: FC<InputProps> = (props) => {
           <Icon icon={icon} title={`title-${icon}`} />
         </div>
       )}
-      <input className="input-inner" disabled={disabled} {...restProps} />
+      <input
+        className="input-inner"
+        disabled={disabled}
+        {...restProps}
+        ref={ref}
+      />
       {append && <div className="input-group-append-con">{append}</div>}
     </div>
   );
-};
+});
 
 export default Input;
