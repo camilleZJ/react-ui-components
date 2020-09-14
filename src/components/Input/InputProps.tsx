@@ -34,4 +34,5 @@ export interface InputProps
   append?: string | ReactElement;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   // ref?: RefObject<HTMLInputElement>;
+  // ref?: React.Ref<HTMLInputElement>;
 }

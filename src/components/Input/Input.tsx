@@ -12,53 +12,64 @@ import Icon from "../Icon";
  *
  * 支持 HTMLInput 的所有基本属性
  */
-export const Input: FC<
-  InputProps & { ref: React.Ref<HTMLInputElement> }
-> = React.forwardRef((props, ref) => {
-  //此处export是为了storybook使用的
-  // const [inputValue, setInputValue] = useState(value);
+// export const Input: FC<
+//   InputProps & { ref: React.Ref<HTMLInputElement> }
+// > = React.forwardRef((props, ref) => {
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  (props, ref) => {
+    //此处export是为了storybook使用的
+    // const [inputValue, setInputValue] = useState(value);
 
-  const { size, disabled, prepend, append, icon, style, ...restProps } = props;
-  const cnames = classNames("input-wrapper", {
-    [`input-size-${size}`]: size,
-    "is-disabled": disabled,
-    "input-group": prepend || append,
-    "input-group-append": !!append,
-    "input-group-prepend": !!prepend,
-  });
+    const {
+      size,
+      disabled,
+      prepend,
+      append,
+      icon,
+      style,
+      ...restProps
+    } = props;
+    const cnames = classNames("input-wrapper", {
+      [`input-size-${size}`]: size,
+      "is-disabled": disabled,
+      "input-group": prepend || append,
+      "input-group-append": !!append,
+      "input-group-prepend": !!prepend,
+    });
 
-  //非受控组件转为受控组件：值有组件的state管理，从undefined变为有意思的值会报错
-  //报错：A component is changing an uncontrolled input of type undefined to be controlled. Input elements should not switch from uncontrolled to controlled (or vice versa).
-  const fixControlledValue = (value: any) => {
-    if (typeof value === "undefined" || value === null) {
-      return "";
+    //非受控组件转为受控组件：值有组件的state管理，从undefined变为有意思的值会报错
+    //报错：A component is changing an uncontrolled input of type undefined to be controlled. Input elements should not switch from uncontrolled to controlled (or vice versa).
+    const fixControlledValue = (value: any) => {
+      if (typeof value === "undefined" || value === null) {
+        return "";
+      }
+
+      return value;
+    };
+    if ("value" in props) {
+      //value和defaultValue不允许同时存在
+      delete restProps.defaultValue;
+      restProps.value = fixControlledValue(props.value);
     }
 
-    return value;
-  };
-  if ("value" in props) {
-    //value和defaultValue不允许同时存在
-    delete restProps.defaultValue;
-    restProps.value = fixControlledValue(props.value);
+    return (
+      <div className={cnames} style={style}>
+        {prepend && <div className="input-group-prepend-con">{prepend}</div>}
+        {icon && (
+          <div className="icon-wrapper">
+            <Icon icon={icon} title={`title-${icon}`} />
+          </div>
+        )}
+        <input
+          className="input-inner"
+          disabled={disabled}
+          {...restProps}
+          ref={ref}
+        />
+        {append && <div className="input-group-append-con">{append}</div>}
+      </div>
+    );
   }
-
-  return (
-    <div className={cnames} style={style}>
-      {prepend && <div className="input-group-prepend-con">{prepend}</div>}
-      {icon && (
-        <div className="icon-wrapper">
-          <Icon icon={icon} title={`title-${icon}`} />
-        </div>
-      )}
-      <input
-        className="input-inner"
-        disabled={disabled}
-        {...restProps}
-        ref={ref}
-      />
-      {append && <div className="input-group-append-con">{append}</div>}
-    </div>
-  );
-});
+);
 
 export default Input;

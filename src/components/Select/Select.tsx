@@ -1,4 +1,11 @@
-import React, { FC, useState, useRef, MouseEvent, useEffect } from "react";
+import React, {
+  FC,
+  useState,
+  useRef,
+  MouseEvent,
+  useEffect,
+  FunctionComponentElement,
+} from "react";
 import classNames from "classnames";
 import useClickOutside from "../../hooks/useClickOutside";
 import Input from "../Input";
@@ -9,7 +16,10 @@ import {
   OptionProps,
   OptionsContextProps,
   SelectContext,
+  ExOptionProps,
 } from "./SelectProps";
+
+type tagpProps = { [key: string]: any };
 
 /**
  * 下拉选择器。
@@ -35,13 +45,15 @@ export const Select: FC<SelectProps> = (props) => {
   const [menuOpen, setMenuToggle] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
+  const tagsCon = useRef<HTMLDivElement>(null);
   const containerWidth = useRef<number>(0);
-  const [value, setValue] = useState<string>(
+  const [value, setValue] = useState<string | React.ReactNode>(
     typeof defaultValue === "string" ? defaultValue : ""
   );
-  const [selectedValues, setSelectedValues] = useState<string[]>(
+  const [selectedValues, setSelectedValues] = useState<any[]>(
     Array.isArray(defaultValue) ? defaultValue : []
   );
+  const [tagInfo, setTagInfo] = useState<tagpProps[]>([]);
 
   const classes = classNames("select-con", {
     "menu-is-open": menuOpen,
@@ -62,10 +74,57 @@ export const Select: FC<SelectProps> = (props) => {
   }, [selectedValues, multiple, placeholder]);
 
   useEffect(() => {
+    let showTag: any[] = [];
+
+    const tagsInfo = React.Children.map(children, (child) => {
+      const childElement = child as FunctionComponentElement<
+        OptionProps & ExOptionProps
+      >;
+      const {
+        value: optionValue,
+        label,
+        children: optionsChildren,
+      } = childElement.props;
+
+      if (Array.isArray(defaultValue)) {
+        if (defaultValue.includes(optionValue)) {
+          showTag.push(optionsChildren || (label ? label : optionValue));
+        }
+      } else if (typeof defaultValue === "string") {
+        if (optionValue === defaultValue) {
+          showTag.push(optionsChildren || (label ? label : optionValue));
+        }
+      }
+
+      return {
+        [optionValue]: optionsChildren || (label ? label : optionValue),
+      };
+    });
+
+    if (showTag.length > 0) {
+      multiple ? setSelectedValues(showTag) : setValue(showTag[0]);
+    }
+    if (tagsInfo) {
+      setTagInfo(tagsInfo);
+    }
+  }, [children, defaultValue]);
+
+  useEffect(() => {
     if (containerRef.current) {
       containerWidth.current = containerRef.current.getBoundingClientRect().width;
     }
   });
+
+  useEffect(() => {
+    if (tagsCon.current && input.current) {
+      const inittagsConHeight = tagsCon.current.getBoundingClientRect().height;
+      const tagsConHeight = inittagsConHeight < 38 ? 38 : inittagsConHeight;
+
+      input.current.style.height = tagsConHeight + "px";
+      tagsCon.current.style.marginTop =
+        (tagsConHeight - inittagsConHeight) / 2 + "PX";
+    }
+  }, [selectedValues]);
 
   const hideOptionList = () => {
     setMenuToggle(false);
@@ -76,7 +135,25 @@ export const Select: FC<SelectProps> = (props) => {
 
   useClickOutside(containerRef, hideOptionList);
 
-  const handleOptionClick = (value: string, hasSelected: boolean) => {
+  const handleOptionClick = (
+    value: string,
+    hasSelected: boolean,
+    isTag: boolean = false
+  ) => {
+    let tag = value;
+
+    if (!isTag) {
+      let showTag: string = "";
+      for (let item of tagInfo) {
+        showTag = item[value];
+        if (showTag) {
+          break;
+        }
+      }
+
+      tag = showTag || value;
+    }
+
     // click again to remove selected when is multiple mode
     if (multiple) {
       setValue("");
@@ -85,16 +162,16 @@ export const Select: FC<SelectProps> = (props) => {
       if (hasSelected) {
         //删除已选择的
         setSelectedValues((prevValues) => {
-          return prevValues.filter((v) => v !== value);
+          return prevValues.filter((v) => v !== tag);
         });
       } else {
         //新增选中项
         setSelectedValues((prevValues) => {
-          return [...prevValues, value];
+          return [...prevValues, tag];
         });
       }
     } else {
-      setValue(value);
+      setValue(tag);
       hideOptionList();
     }
 
@@ -123,17 +200,21 @@ export const Select: FC<SelectProps> = (props) => {
   };
 
   const generateOptions = () => {
-    return React.Children.map(children, (child, index) => {
-      const childElement = child as React.FunctionComponentElement<OptionProps>;
+    const options = React.Children.map(children, (child, i) => {
+      const childElement = child as React.FunctionComponentElement<
+        OptionProps & ExOptionProps
+      >;
       const { displayName } = childElement.type;
       if (displayName === "Option") {
-        return React.cloneElement(childElement, { index: "select-" + index });
+        return React.cloneElement(childElement, { index: "select-" + i });
       } else {
         console.error(
           "Warning: Select has a child which is not a Option component"
         );
       }
     });
+
+    return options;
   };
 
   return (
@@ -143,7 +224,7 @@ export const Select: FC<SelectProps> = (props) => {
           placeholder={placeholder}
           name={name}
           disabled={disabled}
-          value={value}
+          value={value?.toString() || ""}
           icon="angle-down"
           readOnly
           ref={input}
@@ -162,6 +243,7 @@ export const Select: FC<SelectProps> = (props) => {
           style={{
             maxWidth: containerWidth.current - 32,
           }}
+          ref={tagsCon}
         >
           {selectedValues.map((value, index) => {
             return (
@@ -169,7 +251,7 @@ export const Select: FC<SelectProps> = (props) => {
                 {value}
                 <Icon
                   icon="times"
-                  onClick={() => handleOptionClick(value, true)}
+                  onClick={() => handleOptionClick(value, true, true)}
                 />
               </span>
             );
@@ -181,7 +263,7 @@ export const Select: FC<SelectProps> = (props) => {
 };
 Select.defaultProps = {
   placeholder: "请选择",
-  name: "zj-select",
+  name: "select-name",
   multiple: false,
   disabled: false,
   //   clearable:false

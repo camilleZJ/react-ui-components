@@ -3,10 +3,14 @@ import classNames from "classnames";
 import Icon from "../Icon";
 import { OptionProps, SelectContext } from "./SelectProps";
 
-export const Option: FC<OptionProps> = (props) => {
+export const Option: FC<OptionProps & { children?: React.ReactNode }> = (
+  props
+) => {
   const { value, label, disabled, children } = props;
+  const showTag = children || (label ? label : value);
+
   const context = useContext(SelectContext);
-  const isSelected = context.selectedValues.includes(value);
+  const isSelected = context.selectedValues.includes(showTag);
 
   const classes = classNames("select-item", {
     "is-disabled": disabled,
@@ -23,7 +27,7 @@ export const Option: FC<OptionProps> = (props) => {
 
   return (
     <li className={classes} key={value} onClick={handleClick}>
-      {children || (label ? label : value)}
+      {showTag}
       {context.multiple && isSelected && <Icon icon="check" />}
     </li>
   );

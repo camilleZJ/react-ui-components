@@ -1,3 +1,7 @@
+p {
+  margin: 0;
+}
+
 .select-con {
   position: relative;
 
@@ -31,7 +35,7 @@
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
-  z-index: 100;
+  z-index: 101;
 
   width: 100%;
   padding-left: 0;
@@ -76,7 +80,8 @@
   top: 0;
   left: 0;
 
-  height: 100%;
+  // min-height: 100%;
+  height: auto;
   max-width: 100%;
 
   display: flex;
@@ -85,13 +90,22 @@
   flex-wrap: wrap;
 
   .selected-tag {
+    display: flex;
+    align-items: center;
+
     height: 80%;
     padding: 2px 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
     box-sizing: border-box;
     border: 1px solid rgba(13, 110, 253, 0.2);
     margin-left: 6px;
     border-radius: 3px;
     color: #0d6efd;
     background-color: rgba(13, 110, 253, 0.1);
+
+    svg {
+      margin-left: 5px;
+    }
   }
 }

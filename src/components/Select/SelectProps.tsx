@@ -16,7 +16,7 @@ export interface SelectProps {
   /** 下拉框出现/隐藏时触发，出现则为 true，隐藏则为 false */
   onVisibleChange?: (visible: boolean) => void;
 
-  /** 是否可以清空选项 */
+  // /** 是否可以清空选项 */
   //   clearable	:boolean
 }
 
@@ -29,10 +29,19 @@ export interface OptionProps {
   disabled?: boolean;
 }
 
+export interface ExOptionProps {
+  index?: string;
+  children?: React.ReactNode;
+}
+
 export interface OptionsContextProps {
-  onSelect?: (value: string, hasSelected: boolean) => any;
+  onSelect?: (
+    value: string,
+    // showTag: React.ReactNode | string,
+    hasSelected: boolean
+  ) => any;
   multiple?: boolean;
-  selectedValues: string[];
+  selectedValues: any[];
 }
 
 export const SelectContext = createContext<OptionsContextProps>({
