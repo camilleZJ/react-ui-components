@@ -15,9 +15,6 @@ export interface SelectProps {
   onChange?: (selectedValue: string, selectedValues: string[]) => void;
   /** 下拉框出现/隐藏时触发，出现则为 true，隐藏则为 false */
   onVisibleChange?: (visible: boolean) => void;
-
-  // /** 是否可以清空选项 */
-  //   clearable	:boolean
 }
 
 export interface OptionProps {

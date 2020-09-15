@@ -9,7 +9,7 @@ const testProps: InputProps = {
 };
 
 let wrapper: RenderResult;
-describe("", () => {
+describe("test Input component", () => {
   it("should render the correct default Input", () => {
     wrapper = render(<Input {...testProps} />);
     const inputNode = wrapper.getByPlaceholderText(

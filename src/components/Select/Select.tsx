@@ -266,6 +266,5 @@ Select.defaultProps = {
   name: "select-name",
   multiple: false,
   disabled: false,
-  //   clearable:false
 };
 export default Select;
