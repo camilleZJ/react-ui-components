@@ -233,7 +233,7 @@ export const Select: FC<SelectProps> = (props) => {
 
       <SelectContext.Provider value={passedContext}>
         <Transition in={menuOpen} animation="zoom-in-top" timeout={300}>
-          <ul className="select-dropdown">{generateOptions()}</ul>
+          <ul className="select-dropdown" data-testid="dropdown">{generateOptions()}</ul>
         </Transition>
       </SelectContext.Provider>
 

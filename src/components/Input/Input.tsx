@@ -1,4 +1,4 @@
-import React, { FC, RefObject } from "react";
+import React from "react";
 import classNames from "classnames";
 import { InputProps } from "./InputProps";
 import Icon from "../Icon";

@@ -1,9 +1,4 @@
-import {
-  ReactElement,
-  InputHTMLAttributes,
-  ChangeEvent,
-  RefObject,
-} from "react";
+import { ReactElement, InputHTMLAttributes, ChangeEvent } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 type InputSize = "lg" | "sm";
