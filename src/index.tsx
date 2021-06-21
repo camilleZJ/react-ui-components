@@ -12,3 +12,4 @@ export { default as Autocomplete } from "./components/Autocomplete";
 export { default as Progress } from "./components/Progress";
 export { default as Upload } from "./components/Upload";
 export { default as Alert } from "./components/Alert";
+export { default as Tabs } from "./components/Tabs";
